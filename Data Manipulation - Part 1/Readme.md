@@ -10,9 +10,9 @@ _**Data analytics and visualization officer - International Centre for Humanitar
 
 Requirements: 
 
-> Download R <https://www.r-project.org/>
+> Download [R]<https://www.r-project.org/>
 
-> Download RStudio <https://rstudio.com/>
+> Download [RStudio]<https://rstudio.com/>
 
 > Install tidyverse package, from CRAN 
    
