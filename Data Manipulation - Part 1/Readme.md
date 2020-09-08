@@ -2,7 +2,11 @@
 
 September 5, 2020
 
-Trainer: **Naomi Ng'ang'a**, **_Data analytics and visualization officer - International Centre for Humanitarian Affairs(ICHA) - Kenya Redcross**_
+Trainer: 
+
+**Naomi Ng'ang'a**,
+
+**_Data analytics and visualization officer - International Centre for Humanitarian Affairs(ICHA) - Kenya Redcross**_
 
 Requirements: 
 
