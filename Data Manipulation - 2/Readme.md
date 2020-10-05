@@ -6,9 +6,9 @@ Trainer:
 
 Requirements:
 
-Download (R)[https://cran.r-project.org/bin/windows/base/]
+Download [R](https://cran.r-project.org/bin/windows/base/)
 
-Download (RStudio)[https://rstudio.com/products/rstudio/download/]
+Download [RStudio](https://rstudio.com/products/rstudio/download/)
 
 Install tidyverse, readxl and lubridate packages , from CRAN
 
