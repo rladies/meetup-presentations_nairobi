@@ -1,7 +1,7 @@
 
 # Newtork and Graphs in R for Biology
 
-Our trainer: Dr. Susan Holmes, Professor of Statistics at Staford University
+Our trainer: **Dr. Susan Holmes, Professor of Statistics at Staford University**
 
 ## Prerequisites
 
