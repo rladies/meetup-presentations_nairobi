@@ -9,4 +9,4 @@ Prerequistites:
 
 * Install the following packages:  `available`, `usethis`, `devtools`
 
-As an example `rjujubi` package was created, https://github.com/Shelmith-Kariuki/rjujubi
+The dummy package created was `rjujubi`: https://github.com/Shelmith-Kariuki/rjujubi
