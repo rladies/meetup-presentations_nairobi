@@ -1,0 +1,6 @@
+cluster_number	Structure_number	serial_num_HU	House_number	HU_occupied	h07	reason_unoccupied	Name_HH_Head	sex_head	occupation	Total_people	below_4_male	below_4_female	Five_seventeen_male	Five_seventeen_female	eighteen_Above_male	eighteen_Above_female	operate_business	Telephone_head	Telephone_head_other	Telephone_other_member	relationship	comments
+999999	1	1	a1	1	1		ngugi mwenda	1	data clerk	2	1	0	0	0	1	0	1	(0726)015044	(0735)015044	(0799)999999	2	##N/A##
+999999	1	2	a2	1	2		king kong	2	driver	1	0	0	0	0	1	0	2	(0821)111111	(0788)888888	(0776)999999	3	##N/A##
+999999	2	1	a2	1	3		mwenda ngugi	1	statistical officer	1	0	0	0	1	0	0	2	(0988)888888	(0999)999999	(0999)999999	2	##N/A##
+999998	1	1	a2	1	1		Yvonne ronoh	2	recce	1	0	0	0	0	0	1	2	(0788)999999	(0988)777777	(0987)766667	3	none
+999998	2	1	a2	3	2																	family vacation
