@@ -1,0 +1,46 @@
+---
+title: "test tmap failing in view mode when run by learner"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This chunk - the Hello World! example from tmap, with tmap_mode("view") added, works when the tutorial is loaded, or when run from console, but used to fail (with $ operator is invalid for atomic vectors) when 'Run Code' is pressed. This was fixed by RStudio in 2021-02 https://github.com/rstudio/learnr/issues/484
+
+
+```{r tmap-test, exercise = TRUE, exercise.eval = TRUE, message = FALSE, warning = FALSE}
+
+library(tmap)
+
+data("World")
+
+tmap_mode("view")
+
+tm_shape(World) +
+    tm_polygons("HPI")
+
+
+```
+
+Similar chunk loses newlines after `tmap_mode("view")` and initially fails in a different way on 'Run Code', but when the newlines are added back in fails same as above.  
+```{r tmap-test2, exercise = TRUE, exercise.eval = TRUE}
+
+library(tmap)
+
+data("World")
+
+tmap_mode("view")
+
+tm <- tm_shape(World) +
+    tm_polygons("HPI")
+
+ptm <- print(tm)
+
+#suggestion Martijn
+tmap_leaflet(tm)
+
+```

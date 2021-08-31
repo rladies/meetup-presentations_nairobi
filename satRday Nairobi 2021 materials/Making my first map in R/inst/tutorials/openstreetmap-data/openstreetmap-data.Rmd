@@ -1,0 +1,334 @@
+---
+title: "Download and plot OpenStreetMap data from R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+description: >
+  How to select and download OpenStreetMap data by area and type, and then plot on a map.
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+
+# default options for all chunks
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE )
+
+#[TODO packages in here not shown to the user]
+
+library(sf)               # working with vector data
+library(afrilearndata)    # example data
+library(tmap)             # static and interactive mapping
+library(raster)           # raster manipulation
+#library(dplyr)           # data wrangling
+#library(mapview)         # interactive mapping
+
+library(rgdal)            # to try to correct raster error on shinyapps
+
+```
+
+
+## Outline of this tutorial
+
+[TODO: ADD A FEW SENTENCES INTRO TO THIS TUTORIAL]
+
+
+### Outline of afrilearnr
+
+This tutorial is part of the [afrilearnr](https://github.com/afrimapr/afrilearnr) package containing tutorials to teach spatial in R with African data. It is part of the [afrimapr](https://afrimapr.github.io/afrimapr.website/) project.
+
+Through the magic of [learnr](https://rstudio.github.io/learnr/) you can modify the R code in the boxes below and press run to see results.
+
+If you are accessing this from shinyapps you can also install [afrilearnr from github](https://github.com/afrimapr/afrilearnr) and run these tutorials locally.
+
+### How this tutorial relates to others in afrilearnr
+
+tutorial name        | outline                                   | best before/after this
+-------------------- | ----------------------------------------- | ------------------
+`intro-to-spatial-r` |   an introduction to spatial data in R | before
+`join-admin`         |    dealing with data referenced by names rather than coordinates | after
+`get-my-data-in`     |    getting your own spatial data into R | after
+`afrilearnr-crash-course` |   gallery of plots & code with minimal explanation | after
+
+### How to use this tutorial 
+
+[TODO add a few sentences about using this tutorial]
+
+To repeat these steps locally you would need the following packages.
+
+[TODO packages in here will be shown to the user]
+```{r packages, echo=TRUE}
+
+library(readr)            # reading text files
+library(sf)               # working with vector data
+library(mapview)          # interactive mapping
+library(raster)           # raster manipulation
+library(afrilearndata)    # example data, not required if using only your own data
+
+```
+
+## [TODO create sections using ##]
+
+```{r template-exercise, exercise = TRUE, exercise.eval = TRUE}
+
+# TODO add exercise code here    
+
+```
+
+## `osmdata` package
+
+`osmdata` is an R package for downloading data from [OpenStreetMap (OSM)](https://www.openstreetmap.org/#map=2/-30.8/119.1).
+This tutorial takes you through the steps of retrieving points of interest in defined geographical areas using the `osmdata` package,
+and visualising them using the `ggmap` and `ggplot2` packages.
+
+
+### Installing `osmdata`
+
+We can install and load the `osmdata` package from CRAN as follows
+
+```{r install-osmdata, eval=FALSE}
+install.packages("osmdata")
+```
+
+```{r load-osmdata}
+library(osmdata)
+```
+
+### Exploring the `osmdata` package
+
+The `osmdata` package provides spatial data about a wide range of spatial properties and objects across the world.
+The `available_features()` function can be used to get the list of recognized features in OSM. A list of the available features can be found in the [OSM wiki](https://wiki.openstreetmap.org/wiki/Map_Features).
+
+
+```{r print-available-features, attr.output='style="max-height: 200px;"'}
+available_features()
+```
+
+The `available_tags()` function lists out the tags associated with each feature. The tags associated with the feature "amenity" can be retrieved as follows.
+
+```{r print-available-tags, attr.output='style="max-height: 200px;"'}
+available_tags("amenity")
+```
+
+## Creating a query to download data
+
+
+### Defining the bounding box
+
+The first step in creating an `osmdata` query is defining the geographical area we want to include in the query. This can be done by defining a bounding box that defines a geographical area by its bounding latitudes and longitudes. The `osmdata` package provides a function `getbb()` to retrieve the bounding box of a place using its name.
+We can now create the bounding box of Lagos, the largest city in Nigeria.
+
+```{r get-lagos-boundingbox}
+lagos_bb <- getbb("Lagos")
+lagos_bb
+```
+
+### Creating an overpass query
+
+The `osmdata` package retrieves data from the [overpass API](overpass-api.de), which is a read-only API that serves up custom selected parts of the OSM map data.
+To retrieve the required features of a place (defined by the bounding box), we have to then create an overpass query. This can be easily done using the `opq()` function of the `osmdata` package.
+Here we use the previously defined bounding box of Lagos to create the overpass query
+
+```{r create-lagos-opq}
+lagos_bb %>%
+  opq()
+```
+
+
+### Retrieving the `osmdata` object
+
+Then, the `add_osm_feature()` function can be used to add the required features to the query, using the features and tags we explored earlier in this tutorial. This query specified in terms of key-value is used to retreive data on hospitals in Lagos.
+ 
+
+There are two primary osmdata functions for obtaining data from a query: `osmdata_sf()` and `osmdata_sp()`, which return data in simple features (sf) and spatial (sp) formats, respectively.
+Here, we use the `osmdata_sf()` function to obtain a simple feature object of the resultant query.
+
+
+```{r get-lagos-hospitals}
+lagos_hospitals <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature(key = "amenity", value = "hospital") %>%
+  osmdata_sf()
+```
+
+### Understanding the `osmdata` object
+
+The `osmdata` objects will contain the following components
+
+- A bounding box used in query
+- The call submitted to the overpass API  
+- Meta data about the object such as timestamp and version numbers
+- Spatial data - some of which may be empty depending on the type of data retrieved
+
+The following is the `osmdata` object retrieved by querying the hospitals in Lagos
+
+```{r print-lagos-hopitals-osmdata-obj, attr.output='style="max-height: 200px;"'}
+lagos_hospitals
+
+```
+
+Note how each component of the `osmdata` objects is preceded by a $ symbol and some of them are NULL. This is expected, since we queried for hospitals in Lagos, and they are represented using points and polygons only.
+We can also print out each of these components and explore each of them for a better understanding of them.
+
+```{r print-osmdataobj-components}
+# bounding box used in query
+lagos_hospitals$bbox
+
+# metadata
+lagos_hospitals$meta
+```
+
+Note how the Spatial data returned by the query are Simple Feature objects as we requested using the`osmdata_sf()` function, and how the polygons also contain more details about the hospitals such as their names, websites, wikipedia pages etc. where available.
+
+```{r print-osmdataobj-spatial-components, attr.output='style="max-height: 100px;"'}
+# osm_points
+lagos_hospitals$osm_points
+
+# osm_polyogns
+lagos_hospitals$osm_polygons
+```
+
+
+## Visualising queried data
+
+We can visualise the retrieved data about hospitals in Lagos using the `ggplot2` package. We can easily visualise simple feature objects using the `geom_sf()` function of `ggplot2`.
+
+```{r vis-lagos-hospitals-ggplot2}
+# install.packages("ggplot2")
+library(ggplot2)
+
+ggplot()+
+  geom_sf(data = lagos_hospitals$osm_polygons)
+```
+
+While the visualisation above provides useful information about the spread of hospitals in Lagos, it would be useful to plot the locations of hospitals overlayed on a map of Lagos. For this we use the `ggmap` package.
+To get a map of Lagos, we use the `get_map()` function provided by the `ggmap` package. Here we have used the maptype "roadmap", but the function allows many more map types which can be found [here](https://www.rdocumentation.org/packages/ggmap/versions/3.0.0/topics/get_map).
+
+```{r get-lagos-map}
+library(ggmap)
+lagos_map <- get_map(lagos_bb, maptype = "roadmap")
+```
+
+Then we call `ggmap()` with the background map retreived map using `get_map()`, and overlay the spatial data of the hospitals on it using `geom_sf()`.
+Note how we have changed the colour and outline line size of the polygons, filled them in and also changed the opacity to introduce some transparency to the polygons. We also set `inherit.aes = FALSE` to use the aesthetic mappings of the spatial object `lagos_hospitals$osm_polygons`.
+ 
+
+```{r vis-lagos-hospitals-ggmap}
+ggmap(lagos_map) +
+  geom_sf(data = lagos_hospitals$osm_polygons,
+          inherit.aes = FALSE,
+          colour = "#08519c",
+          fill = "#08306b",
+          alpha = .5,
+          size = 1) +
+  labs(x = "", y = "")
+```
+
+
+## A complete example
+
+The following is a complete example of using the `osmdata` package to retrieve data of hospitals in Lagos and `ggmap` to visualise them.
+
+```{r lagos-hospitals-example}
+#install.packages(c("osmdata", "ggplot2", "ggmap"))
+library(osmdata)
+library(ggplot2)
+library(ggmap)
+
+#creating bounding box for Lagos
+lagos_bb <- getbb("Lagos")
+
+# retrieving data of hospitals in Lagos
+lagos_hospitals <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature(key = "amenity", value = "hospital") %>%
+  osmdata_sf()
+
+# retrieving map of lagos
+lagos_map <- get_map(lagos_bb, maptype = "roadmap")
+
+# visualising map of lagos overlayed by hospitals in lagos
+ggmap(lagos_map) +
+  geom_sf(data = lagos_hospitals$osm_polygons,
+          inherit.aes = FALSE,
+          colour = "#08519c",
+          fill = "#08306b",
+          alpha = .5,
+          size = 1)+
+  labs(x = "", y = "")
+```
+
+
+The `osmdata` package can also be used to download other spatial features such as highways and rivers in Lagos, and overlay them on top of each other using `ggplot2` to create a map of Lagos.
+For this we create multiple queries for each feature as follows.
+
+
+```{r lagos-features-and-hospitals-example, eval=TRUE}
+library(osmdata)
+library(ggplot2)
+
+# creating bounding box for Lagos
+lagos_bb <- getbb("Lagos")
+
+# retrieving data of streets in Lagos
+lagos_streets <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature("highway", c("motorway", "primary", "secondary", "tertiary")) %>%
+  osmdata_sf()
+
+# retrieving data of small streets in Lagos
+lagos_small_streets <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature(key = "highway", value = c("residential", "living_street", "unclassified", "service", "footway")) %>%
+  osmdata_sf()
+
+# retrieving data of rivers in Lagos
+lagos_rivers <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature(key = "waterway", value = "river") %>%
+  osmdata_sf()
+
+# retrieving data of hospitals in Lagos
+lagos_hospitals <- lagos_bb %>%
+  opq() %>%
+  add_osm_feature("amenity", "hospital") %>%
+  osmdata_sf()
+
+```
+
+Then we use the `ggplot2` package to visualise each of these features along with the hospitals in Lagos. Note how we have used different colours, line sizes (thicknesses) and opacities to differentiate among the features.
+
+
+```{r vis-lagos-features-and-hospitals-example}
+# visualising all retreived features over each other to form a map of Lagos
+ggplot() +
+  geom_sf(data = lagos_streets$osm_lines, inherit.aes = FALSE, color = "#ffbe7f", size = .4, alpha = .8) +
+  geom_sf(data = lagos_small_streets$osm_lines, inherit.aes = FALSE, color = "#a6a6a6", size = .2, alpha = .8) +
+  geom_sf(data = lagos_rivers$osm_lines, inherit.aes = FALSE, color = "#7fc0ff", size = .8, alpha = .5) +
+  geom_sf(data = lagos_hospitals$osm_polygons, inherit.aes = FALSE, colour = "#08519c", fill = "#08306b",alpha = .5, size = 1) +
+  coord_sf(xlim = c(3.23, 3.56), ylim = c(6.4,6.629), expand = FALSE) +
+  theme_bw()
+```
+
+We can also use the `leaflet` package to visualise an interactive map of the hospitals in Lagos.
+
+```{r}
+#install.packages("leaflet")
+library(leaflet)
+
+leaflet() %>% 
+  addTiles() %>% 
+  addPolygons(data = lagos_hospitals$osm_polygons,
+              label = lagos_hospitals$osm_polygons$name)
+
+```
+
+
+
+## References
+
+- `osmdata` repository : https://github.com/ropensci/osmdata  
+- `osmdata` package vignette : https://cran.r-project.org/web/packages/osmdata/vignettes/osmdata.html
+- `ggplot2` package: https://ggplot2.tidyverse.org/
+- `ggmap` package documentation : https://www.rdocumentation.org/packages/ggmap/versions/3.0.0/topics/get_map
+- 'Accessing Open Street Map data with R': https://dominicroye.github.io/en/2018/accessing-openstreetmap-data-with-r/
+- `#30diasdegraphics` https://github.com/danielredondo/30diasdegraficos/blob/master/scripts/18_mapa.R
+

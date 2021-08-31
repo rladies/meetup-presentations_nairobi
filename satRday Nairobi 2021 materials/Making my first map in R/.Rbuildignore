@@ -1,0 +1,10 @@
+^afrilearnr\.Rproj$
+^\.Rproj\.user$
+^inst/tutorials/intro-to-spatial-r/intro-to-spatial-r\.Rmd$
+^inst/tutorials/join-admin/join-admin\.Rmd$
+^inst/tutorials/afrilearnr-crash-course/afrilearnr-crash-course\.Rmd$
+^data-raw$
+[.]dcf$
+
+^README\.Rmd$
+^inst/tutorials/test-sf/test-sf\.Rmd$

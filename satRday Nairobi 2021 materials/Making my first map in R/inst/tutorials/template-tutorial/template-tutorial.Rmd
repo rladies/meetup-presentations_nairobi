@@ -1,0 +1,118 @@
+---
+title: "Blank afrimapr tutorial template"
+output: learnr::tutorial
+runtime: shiny_prerendered
+description: >
+  A blank template for afrimapr authors to create other tutorials in a consistent format
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+
+# default options for all chunks
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE )
+
+#[TODO packages in here not shown to the user]
+
+library(sf)               # working with vector data
+library(afrilearndata)    # example data
+library(tmap)             # static and interactive mapping
+library(raster)           # raster manipulation
+#library(dplyr)           # data wrangling
+#library(mapview)         # interactive mapping
+
+library(rgdal)            # to try to correct raster error on shinyapps
+
+```
+
+
+## Outline of this tutorial
+
+[TODO: ADD A FEW SENTENCES INTRO TO THIS TUTORIAL]
+
+
+### Outline of afrilearnr
+
+This tutorial is part of the [afrilearnr](https://github.com/afrimapr/afrilearnr) package containing tutorials to teach spatial in R with African data. It is part of the [afrimapr](https://afrimapr.github.io/afrimapr.website/) project.
+
+Through the magic of [learnr](https://rstudio.github.io/learnr/) you can modify the R code in the boxes below and press run to see results.
+
+If you are accessing this from shinyapps you can also install [afrilearnr from github](https://github.com/afrimapr/afrilearnr) and run these tutorials locally.
+
+A third option, for lower bandwidths, is to download a [pdf of the tutorial](https://github.com/afrimapr/afrilearnr/tree/main/inst/pdfs) and run through by copying the code into an R console.
+
+### How this tutorial relates to others in afrilearnr
+
+tutorial name        | outline                                   | recommended order
+-------------------- | ----------------------------------------- | ------------------
+`intro-to-spatial-r` |   an introduction to spatial data in R | 1 this one
+`get-my-data-in`     |    getting your own spatial data into R | 2
+`join-admin`         |    dealing with data referenced by names rather than coordinates | 3
+`afrilearnr-crash-course` |   gallery of plots & code with minimal explanation | 4
+
+### How to use this tutorial 
+
+[TODO add a few sentences about using this tutorial]
+
+To repeat these steps locally you would need the following packages.
+
+[TODO packages in here will be shown to the user]
+```{r packages, echo=TRUE}
+
+library(readr)            # reading text files
+library(sf)               # working with vector data
+library(mapview)          # interactive mapping
+library(raster)           # raster manipulation
+library(afrilearndata)    # example data, not required if using only your own data
+
+```
+
+## [TODO create sections using ##]
+
+```{r template-exercise, exercise = TRUE, exercise.eval = TRUE}
+
+# TODO add exercise code here    
+
+```
+
+## Other sources of information
+
+[Geocomputation in R](https://geocompr.robinlovelace.net/)
+
+
+
+```{r echo=FALSE}
+# chunk below enables printing whole tutorial from browser e.g. to pdf
+# DO NOT put any #comments in the chunk below, that stops it from working !! 
+# from https://github.com/rstudio/learnr/issues/465
+# saving csss in a separate file print.css didn't work locally or on shinyapps because browser couldn't find file 
+```
+```{css echo=FALSE}
+@media print {
+  .topicsContainer,
+  .topicActions,
+  .exerciseActions .skip {
+    display: none;
+  }
+  .topics .tutorialTitle,
+  .topics .section.level2,
+  .topics .section.level3:not(.hide) {
+    display: block;
+  }
+  .topics {
+    width: 100%;
+  }
+  .tutorial-exercise, .tutorial-question {
+    page-break-inside: avoid;
+  }
+  .section.level3.done h3 {
+    padding-left: 0;
+    background-image: none;
+  }
+  .topics .showSkip .exerciseActions::before {
+    content: "Topic not yet completed...";
+    font-style: italic;
+  }
+}  
+  
+```

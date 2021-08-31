@@ -1,0 +1,37 @@
+Package: afrilearnr
+Title: Tutorials on spatial data in R using African data
+Version: 0.0.0.9006
+Authors@R: 
+    c(
+    person(given = "Laurie",
+           family = "Baker",
+           role = c("aut", "cre"),
+           email = "laurie.baker@glasgow.ac.uk",
+           comment = c(ORCID = "0000-0003-3107-6588")),
+    person(given = "Andy",
+           family = "South",
+           role = c("aut"),
+           email = "southandy@gmail.com",
+           comment = c(ORCID = "0000-0003-4051-6135"))
+    )
+Description: Tutorials to introduce spatial data manipulation in R using African data. 
+   Aimed at those relatively new to R and/or spatial data.
+License: CC BY-SA 4.0
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    sf,
+    learnr,
+    dplyr,
+    ggplot2,
+    mapview,
+    gapminder,
+    tmap,
+    rgdal,
+    kableExtra,
+    viridisLite
+Remotes: 
+    rstudio/fontawesome,
+    afrimapr/afrilearndata

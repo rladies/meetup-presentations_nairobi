@@ -1,0 +1,130 @@
+---
+title: "small tutorial for testing shinyapps deployment"
+output: learnr::tutorial
+runtime: shiny_prerendered
+description: >
+  test sf 
+---
+
+For diagnosis of why the join tutorial didn't work on shinyapps.
+Now fixed and this should work too
+
+
+```{r setup, include=FALSE}
+
+# library to run the tutorial
+library(learnr)
+```
+
+
+```{r library_packages, include=FALSE}
+
+# previously in join-admin got :
+# Error in value[[3L]](cond) : there is no package called 'sf'
+# turned out to be an issue with the fill-the-blanks sections lower down
+# updating to dev version of packrat locally fixed deployment
+# remotes::install_github('rstudio/packrat')
+# see https://github.com/afrimapr/afrilearnr/issues/4#issue-791404707
+
+# working with geographic data
+library(sf) 
+
+#plotting and data wrangling
+#library(tidyverse) #reducing dependencies
+library(dplyr)
+library(ggplot2)
+
+# plotting and exploring geographic data
+library(mapview) 
+
+# gapminder data
+library(gapminder) 
+
+# afrilearndata
+library(afrilearndata)
+
+# include leaflet for mapping
+library(leaflet)
+
+# interactive map using tmap
+library(tmap)
+
+# icons
+library(fontawesome)
+
+# tables
+library(kableExtra)
+
+# labels
+library(ggrepel)
+
+# Set up the first data.frame
+africa_gap <- gapminder %>%
+                  filter(continent == "Africa",
+                         year == 2007)
+```
+
+
+
+```{r tmap_data_sample, eval = TRUE, echo = FALSE, message = FALSE, warning=FALSE}
+
+#temporary fix for shinyapps & may help for users with an older version of rgdal
+sf::st_crs(africapitals) <- 4326
+sf::st_crs(afrihighway) <- 4326
+sf::st_crs(africountries) <- 4326
+sf::st_crs(africontinent) <- 4326 
+
+tmap_mode("view")
+
+t <-  tm_shape(africountries) +
+      tm_polygons(col = "tan", alpha = 0.2, border.col = "black") +
+      tm_shape(afripop2000)  +
+      tm_raster(palette = terrain.colors(10), style="fisher") +
+      tm_shape(afripop2020)  +
+      tm_raster(palette = terrain.colors(10), style="fisher") +
+      tm_shape(afrihighway) +
+      tm_lines(col = "red") + 
+      tm_shape(africapitals) +
+      tm_symbols(col = "blue", shape= 1, scale = 0.7) + #shape=1 for open circle
+      tm_legend(show = TRUE)
+
+t %>% 
+  tmap_leaflet() %>%
+  leaflet::hideGroup("africapitals") %>%
+  leaflet::hideGroup("afripop2000") %>%
+  leaflet::hideGroup("afrihighway") %>%
+  leaflet::hideGroup("afripop2020")
+
+```
+
+```{r filter_gapminder_prep, echo = FALSE}
+
+africa_gap <- gapminder %>%
+                  filter(continent == "Africa",
+                         year == 2007)
+
+```
+
+```{r final_left_join2, echo = FALSE}
+
+africa_df <- dplyr::left_join(x = africountries, 
+                                        y = africa_gap, 
+                                        by = c("name_long" = "country")
+                                        ) %>%
+  mutate(pop_est = as.numeric(pop_est))
+
+```
+
+```{r plot3, exercise = TRUE, eval = TRUE, exercise.setup = "final_left_join2"}
+
+ggplot(data = africa_df) +
+    geom_sf(aes(fill = pop_est)) +
+    scale_fill_viridis_c()
+
+```
+
+
+
+
+
+
