@@ -2,7 +2,7 @@
 title: "Customizing R Markdown"
 subtitle: "satRday Nairobi<br><br><br><br><br><br>"
 author: "Mine Çetinkaya-Rundel"
-date: '`r Sys.Date()`'
+date: "[rstd.io/rmd-custom](https://rstd.io/rmd-custom)"
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css
@@ -116,7 +116,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -154,7 +154,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -208,7 +208,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -241,7 +241,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -276,7 +276,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -307,7 +307,7 @@ background-size: cover
 <br><br><br><br><br>
 
 .midi[
-.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+.hand[follow along at] [rstd.io/rmd-custom-cloud](https://rstd.io/rmd-custom-cloud)
 ]
 
 ---
@@ -342,12 +342,20 @@ knitr::include_graphics("images/cheatsheet.png")
 
 ---
 
+## Acknowledgements
+
+- RStudio R Markdown team + community
+- RStudio cheat sheets intern Averi Perny
+- Fernando Campos for the [**ramboseli**](https://github.com/amboseli/ramboseli) package (and Jenny Tung for the pointer!)
+
+---
+
 class: middle, inverse
 
 .center[
 .large[
 .hand[
-thank you!
+thank you! <br><br> [rstd.io/rmd-custom](https://rstd.io/rmd-custom)
 ]
 ]
 ]
