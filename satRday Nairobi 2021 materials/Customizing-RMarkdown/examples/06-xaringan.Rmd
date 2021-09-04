@@ -1,0 +1,80 @@
+---
+title: "Rainfall in Amboseli, Kenya"
+author: "Mine Çetinkaya-Rundel"
+date: "9/3/2021"
+output: html_document
+---
+
+In this document we create a simple visualization of rainfall in Amboseli, Kenya in wet and dry seasons over the last 40+ years.
+
+## Setup
+
+Let's start by loading the packages we'll use for our analysis.
+One of the packages is **tidyverse**.
+
+```{r load-packages, message = FALSE}
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(ramboseli)  # install_github("amboseli/ramboseli")
+```
+
+## Data
+
+And then let's load the data.
+The data come from the [Amboseli Baboon Research Project](https://amboselibaboons.nd.edu/downloads/) and it has been complied by the directors of the project Jeanne Altmann and Susan C. Alberts.
+
+```{r load-data}
+amboseli_rainfall_raw <- read_excel(here::here("satRday Nairobi 2021 materials/Customizing-RMarkdown/examples/data", "amboseli_rainfall_2020.xls"), skip = 3)
+```
+
+Before we can plot the data let's clean up the lengthy variable names, filter the data for 1977 onwards (years with complete monhtly data), and create a new variable `season` which takes on the values `"Wet season"` (June through October) and `"Dry season"` (November through May).
+
+```{r clean-data}
+amboseli_rainfall <- amboseli_rainfall_raw %>%
+  clean_names() %>%
+  filter(year >= 1977) %>%
+  mutate(
+    month = factor(month, levels = month.name, ordered = TRUE),
+    season = case_when(
+      month %in% c("June", "July", "August", "September", "October") ~ "Dry season",
+      TRUE ~ "Wet season",
+    )
+  )
+```
+
+## Color palette
+
+One last step before plotting: let's set up a color palette inspired by the landscape of Amboseli.
+The color palette comes from the `ramboseli` package, which can be found [on GitHub](https://github.com/amboseli/ramboseli).
+
+```{r set-color-palette}
+amboseli_palette <- data.frame(matrix(amboseli_palettes$div_earthsky[[5]], nrow = 1))
+names(amboseli_palette) <- c("darkblue", "lightblue", "cream", "lightbrown", "darkbrown")
+```
+
+## Data visualization
+
+We're finally ready to visualize the data.
+Since we're interested in total yearly rainfall for the two seasons in each year, we'll summarize the data obtain these two values for each year first, and then plot the data in the summary table.
+We can do this all in a single pipeline.
+
+```{r plot-data, fig.alt = "Lineplot with two lines (one for wet season and the other for dry season) depicting total yearly rainfall between 1977 to 2020. Rainfall in the dry season is much lower (below 100 mm) for all years and not very variable. Rainfall in the wet season is higher (randing between 100 to 600 mm and also much more variable compared to the dry season. Plot caption says that the source of the data is the Amboseli Babon Research Project."}
+amboseli_rainfall %>%
+  group_by(year, season) %>%
+  summarise(total_rainfall = sum(monthly_rainfall_mm), .groups = "drop") %>%
+  ggplot(aes(x = year, y = total_rainfall, group = season, color = season)) +
+  geom_line(size = 1) +
+  scale_color_manual(values = c(amboseli_palette$lightbrown, amboseli_palette$lightblue)) +
+  labs(
+    x = "Year", y = "Total rainfall (mm)", color = NULL,
+    title = "Total rainfall in wet and dry seasons in Amboseli, Kenya",
+    caption = "Source: Amboseli Baboon Research Project"
+  ) +
+  guides(color = guide_legend(reverse = TRUE)) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = c(0.15, 0.9),
+    legend.background = element_rect(fill = "white", color = "white")
+  )
+```
