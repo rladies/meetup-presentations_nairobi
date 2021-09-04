@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Customizing R Markdown</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mine Çetinkaya-Rundel" />
+    <meta name="date" content="2021-09-04" />
+    <script src="customize-rmd_files/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Customizing R Markdown
+## satRday Nairobi<br><br><br><br><br><br>
+### Mine Çetinkaya-Rundel
+### 2021-09-04
+
+---
+
+
+
+
+
+
+
+
+class: middle, inverse
+
+# R ❤️ Markdown sitting in a tree
+
+# K-I-S-S-I-N-G
+
+---
+
+## What is Markdown?
+
+- Lightweight markup language with plain text formatting syntax
+
+- Designed so that it can be converted to HTML (and many other formats)
+
+&lt;img src="images/markdown.png" title="On the left, a README written in markdown. On the right, the rendered version in HTML." alt="On the left, a README written in markdown. On the right, the rendered version in HTML." width="90%" /&gt;
+
+---
+
+## What is R Markdown?
+
+- Markdown + R
+
+- Text + R code (in chunks) gets converted to text + R code + R output in HTML (and many other formats)
+
+&lt;img src="images/simple-rmd.png" title="On the left, an R Markdown file. On the right, the rendered version in HTML." alt="On the left, an R Markdown file. On the right, the rendered version in HTML." width="90%" /&gt;
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `01-rmd-simple.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Aside: Visual editor
+
+---
+
+## Visual editor
+
+.pull-left[
+- Visual editing for all of text, tables, lists, etc.
+- Support for citations
+- Cross-refs, footnotes, equations, LaTeX
+]
+.pull-right[
+- Real time spell-checking, outline navigation
+- Tight integration with source editing
+- Insert anything with catch-all `⌘ /` shortcut
+]
+
+&lt;img src="images/visual-editor.png" title="On the left, R Markdown file opened with the visual editor. On the right, the rendered version in HTML." alt="On the left, R Markdown file opened with the visual editor. On the right, the rendered version in HTML." width="90%" /&gt;
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `02-visual-editor.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Customizing .brown[chunk options]
+
+---
+
+## Show / hide
+
+- `message = FALSE` and `warning = FALSE` to suppress messages and warnings (with caution!)
+- `error = TRUE` to knit despite an error
+- `include = FALSE` to run, but hide output, messages, warnings, etc.
+
+---
+
+## Chunk options for figures
+
+- Recommended chunk options:
+  - `fig.retina = 3`
+  - `out.width = "70%"`
+  - `fig.width = 6`
+  - `fig.asp = 0.618`
+  - `fig.alt`: Alternative text
+- More on this:
+  - [R for Data Science - Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+  - [Tips and tricks for working with images and figures in R Markdown documents](https://www.zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/)
+
+---
+
+## Setting global options
+
+
+```r
+knitr::opts_chunk$set(
+  fig.retina = 3,
+  out.width = "70%",
+  fig.width = 6,
+  fig.asp = 0.618
+)
+```
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `03-chunk-options.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Customizing .brown[output]
+
+---
+
+## Same input, different outputs
+
+with a simple change in the YAML
+
+
+```r
+output: html_document
+output: pdf_document
+output: word_document
+output: tufte::tufte_html
+...
+```
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `04-outputs.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Customizing .brown[theme]
+
+---
+
+## Change output options
+
+&lt;img src="images/visual-editor.png" title="Edit R Markdown document options window." alt="Edit R Markdown document options window." width="90%" /&gt;
+
+---
+
+## bslib &amp; thematic
+
+- [**bslib**](https://rstudio.github.io/bslib/): Tools for customizing [Bootstrap themes](https://getbootstrap.com/docs/4.6/getting-started/theming/) directly from R, making it much easier to customize the appearance of Shiny apps &amp; R Markdown documents
+
+- [**thematic**](https://rstudio.github.io/thematic/): Simplified theming of ggplot2, lattice, and base R graphics, automatically styled in R Markdown documents (and Shiny apps, and in the RStudio IDE)
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `05-theme.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Customizing .brown[format]
+
+---
+
+## Same-ish source, different format
+
+Using R Markdown, you can write
+
+- books: **bookdown**
+- websites: **blogdown**, **distill**, **pkgdown**
+- slide decks: **xaringan**
+- dashboards: **flexdashboard**
+- ...
+
+---
+
+background-image: url("images/amboseli-land.jpeg")
+background-size: cover
+
+## demo: `06-xaringan.Rmd`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.midi[
+.hand[follow along at] [rstd.io/rmd-satrday-nairobi](https://rstd.io/rmd-satrday-nairobi)
+]
+
+---
+
+class: middle, inverse
+
+# Learn .brown[more]
+
+---
+
+.center[
+.midi[
+[rmarkdown.rstudio.com/gallery.html](https://rmarkdown.rstudio.com/gallery.html)
+]
+]
+
+&lt;img src="images/rmd-gallery.png" title="R Markdown Gallery." alt="R Markdown Gallery." width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.center[
+.midi[
+[rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
+]
+]
+
+&lt;img src="images/cheatsheet.png" title="R Markdown cheat sheet." alt="R Markdown cheat sheet." width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle, inverse
+
+.center[
+.large[
+.hand[
+thank you!
+]
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
