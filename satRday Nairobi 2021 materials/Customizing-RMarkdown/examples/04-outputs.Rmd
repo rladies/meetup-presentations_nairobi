@@ -2,7 +2,10 @@
 title: "Rainfall in Amboseli, Kenya"
 author: "Mine Çetinkaya-Rundel"
 date: "9/3/2021"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: false
 ---
 
 In this document we create a simple visualization of rainfall in Amboseli, Kenya in wet and dry seasons over the last 40+ years.
@@ -25,7 +28,7 @@ And then let's load the data.
 The data come from the [Amboseli Baboon Research Project](https://amboselibaboons.nd.edu/downloads/) and it has been complied by the directors of the project Jeanne Altmann and Susan C. Alberts.
 
 ```{r load-data}
-amboseli_rainfall_raw <- read_excel(here::here("satRday Nairobi 2021 materials/Customizing-RMarkdown/examples/data", "amboseli_rainfall_2020.xls"), skip = 3)
+amboseli_rainfall_raw <- read_excel(here::here("data", "amboseli_rainfall_2020.xls"), skip = 3)
 ```
 
 Before we can plot the data let's clean up the lengthy variable names, filter the data for 1977 onwards (years with complete monhtly data), and create a new variable `season` which takes on the values `"Wet season"` (June through October) and `"Dry season"` (November through May).

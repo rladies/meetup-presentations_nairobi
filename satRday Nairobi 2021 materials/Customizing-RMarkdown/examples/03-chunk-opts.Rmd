@@ -5,6 +5,16 @@ date: "9/3/2021"
 output: html_document
 ---
 
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  fig.retina = 3,
+  out.width = "70%",
+  fig.width = 6,
+  fig.asp = 0.618,
+  echo = FALSE
+)
+```
+
 In this document we create a simple visualization of rainfall in Amboseli, Kenya in wet and dry seasons over the last 40+ years.
 
 ## Setup
@@ -25,7 +35,7 @@ And then let's load the data.
 The data come from the [Amboseli Baboon Research Project](https://amboselibaboons.nd.edu/downloads/) and it has been complied by the directors of the project Jeanne Altmann and Susan C. Alberts.
 
 ```{r load-data}
-amboseli_rainfall_raw <- read_excel(here::here("satRday Nairobi 2021 materials/Customizing-RMarkdown/examples/data", "amboseli_rainfall_2020.xls"), skip = 3)
+amboseli_rainfall_raw <- read_excel(here::here("data", "amboseli_rainfall_2020.xls"), skip = 3)
 ```
 
 Before we can plot the data let's clean up the lengthy variable names, filter the data for 1977 onwards (years with complete monhtly data), and create a new variable `season` which takes on the values `"Wet season"` (June through October) and `"Dry season"` (November through May).
@@ -59,7 +69,7 @@ We're finally ready to visualize the data.
 Since we're interested in total yearly rainfall for the two seasons in each year, we'll summarize the data obtain these two values for each year first, and then plot the data in the summary table.
 We can do this all in a single pipeline.
 
-```{r plot-data, fig.alt = "Lineplot with two lines (one for wet season and the other for dry season) depicting total yearly rainfall between 1977 to 2020. Rainfall in the dry season is much lower (below 100 mm) for all years and not very variable. Rainfall in the wet season is higher (randing between 100 to 600 mm and also much more variable compared to the dry season. Plot caption says that the source of the data is the Amboseli Babon Research Project."}
+```{r plot-data, fig.alt = "Lineplot with two lines (one for wet season and the other for dry season) depicting total yearly rainfall between 1977 to 2020. Rainfall in the dry season is much lower (below 100 mm) for all years and not very variable. Rainfall in the wet season is higher (randing between 100 to 600 mm and also much more variable compared to the dry season. Plot caption says that the source of the data is the Amboseli Babon Research Project.", fig.align = "center"}
 amboseli_rainfall %>%
   group_by(year, season) %>%
   summarise(total_rainfall = sum(monthly_rainfall_mm), .groups = "drop") %>%

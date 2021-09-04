@@ -255,7 +255,7 @@ class: middle, inverse
 ## Change output options
 
 ```{r echo = FALSE, fig.alt = "Edit R Markdown document options window."}
-knitr::include_graphics("images/visual-editor.png")
+knitr::include_graphics("images/themes.png")
 ```
 
 ---
