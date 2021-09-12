@@ -1,6 +1,6 @@
 ## TidyTuesday
 
-Our trainers: Maggie Wanjiru and John Mutiso
+Our trainers: Maggie Wanjiru, Risk Analyst, Financial Services and John Mutiso, Statistician, Phastar LTD
 
 About trainers:
 
