@@ -1,11 +1,7 @@
 ## Tell Stories with Data: Communication in Data Science
 
-Our tariner: Samuel Kamande
+### September 4, 2021
 
-About trainer: Kamande is a Data Scientist based in Nairobi. He holds a Bachelor’s degree in Statistics and a Master’s degree in Computational Intelligence from The University of Nairobi. He most recently worked at Ajua, an Integrated Customer Experience company. In this role, he led a team that provided data support for various product streams and developed new products to drive consumer understanding through advanced analytics and machine learning. His previous roles include; a Data Science curriculum consultant with Moringa School and a data associate for East Africa at Nielsen. He was also part of the Data Science Global Emerging Leaders program. Kamande has published papers on understanding the consumption and viewing habits of the Kenyan consumer and locally available data in peer reviewed journals and presented at various conferences in Africa. He is also NPS certified and facilitates Integrated CX masterclasses in Africa.
+Our trainer: Samuel Kamande, Formerly at Ajua Data Sientist
 
-Twitter: https://twitter.com/kamandeh_
-
-LinkedIn: https://ke.linkedin.com/in/kamande-wambui
-
-Septtermber 4, 2021
+Data storytelling can be posited as the last ten feet of any data analysis and arguably the most important aspect. Your ability to break down your work articulately to various audiences who are looking for marginally or substantially differently packaged outputs for decision making is key. This is the only true value of data analysis to your audience. Based on his experience in both B2C (Agency) and internal analytics teams, Kamande highlights the importance of a stakeholder audience matrix and building up from this in data storytelling for maximum data science value creation.
