@@ -1,7 +1,7 @@
 
 ## Introduction to Package Development in R
 
-Speaker: **Shelmith Kariuki, Data Analltics Consultant**
+Speaker: **Shelmith Kariuki, Data Analytics Consultant**
 
 Prerequistites: 
 
