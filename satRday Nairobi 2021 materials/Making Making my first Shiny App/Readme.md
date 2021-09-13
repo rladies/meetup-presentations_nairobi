@@ -1,9 +1,23 @@
-## Making my first Shiny App
+## Making my first Shiny App; September 4, 2021
 
 Our trainer: Bryson Mwamburi, Data Scientist, Kantar
 
-About our trainer: Bryson Mwamburi is a Data Scientist at Kantar. Kantar is a data analytics and brand consulting company, based in London, England that helps clients understand people and inspire growth. Bryson is a recipient of Facebook's Secure & Private AI, Intel's Edge AI scholarships and a Big Data Mastery Award from IBM, he contributes to the client and business success through analytics. Away from wrangling insights, Mwamburi enjoys motorcycling, rugby and swimming, having represented the country in the latter. An avid reader and self-proclaimed master chef, he pairs both with a good glass of wine and the occasional tinge of a sunset. 
+Shiny offers data storytellers and end consumers the ability to publish and interact with insightful findings on the fly. In this session, we shall cover an introduction to Shiny alongside a few examples of Shiny Apps.
 
-Twitter: https://twitter.com/BrysonMwamburi
+To be covered:
 
-LinkedIn: https://www.linkedin.com/in/bryson-mwakuwona-492925118/
+- Why Shiny?
+- How it works: Build, Deployment and Maintenance
+  - Build: Structure of shiny apps
+  - Deployment: Options available for in-house and external publishing
+  - Maintenance: Stress testing, server monitoring
+- Building a basic Shiny App: Old Faithful Geyser Example
+- Shiny Cheat codes: Layout, functionality shortcuts
+- Shiny examples/showcase
+ 
+Session prerequisites:
+
+- R version 3.6.1 and above
+- RStudio  
+- Shiny Package installed(with dependencies)
+- Internet connection 
