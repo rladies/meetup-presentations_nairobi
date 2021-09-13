@@ -1,4 +1,4 @@
-## Intriduction to tidy models in R
+## Introduction to tidy models in R
 
 ### September 4, 2021
 
