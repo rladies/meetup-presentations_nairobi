@@ -1,4 +1,6 @@
-## Introduction to Data Management; September 4, 2021
+## Introduction to Data Management
+
+### September 4, 2021
 
 Our trainer: Christopher Maronga, R Programmer, University of Oxford, NDORMS
 
