@@ -1,13 +1,7 @@
 ## Working on  projects in R
 
-Our trainer: Dr. Maëlle Salmon
+### September 4, 2021
 
-About our trainer: Biography: Maëlle Salmon is a R(esearch) Software Engineer, part-time with rOpenSci. She also enjoys blogging about R, in particular R package development (on her personal blog and R-hub blog). She is a volunteer software review editor for rOpenSci and the main manager of R-Ladies Global Twitter account; as well as a former R Weekly curator. She's based in Nancy, France
+Our trainer: Dr. Maëlle Salmon, R(esearch) Software Engineer, part-time with rOpenSci
 
-Twitter: @ma_salmon
-
-Github: maelle
-
-Personal  website: https://masalmon.eu/
-
-September 4, 2021
+A good R project organization is useful even if you do not have collaborators as demanding as The Little Prince. But how to do that? Do you put the project in some sort of box? In this talk I will present tools that are good to know: git, here, renv, targets, orderly… I’ll also report whether making an R package out of everything is always a good idea. After this presentation you will have learnt tips and tricks to apply as you like in your R projects. I hope every one of you will learn at least one new thing!
