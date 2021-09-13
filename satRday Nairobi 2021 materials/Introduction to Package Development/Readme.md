@@ -1,4 +1,6 @@
-## Introduction to Package Development; September 04, 2021
+## Introduction to Package Development
+
+### September 04, 2021
 
 Our trainer, Stephen Balogun, Team Lead, Epidemiology and Surveillance Caritas Nigeria CDC 4GATES Program, Caritas Nigeria
 
