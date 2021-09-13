@@ -1,3 +1,9 @@
+## Modularising shiny apps
+
+### September 4, 2021
+
+Our trainer: Dr. Tor-G. Vågen, Principal Scientist and head of the Spatial Data Science and Applied Learning Lab (SPACIAL) at CIFOR-ICRAF
+
 This is a repository containing code for the "Modularizing Shiny Apps" R Ladies Nairobi workshop on Sept 4, 2021. In the workshop, we will explore how modules can help us better manage Shiny apps when they become a bit large and/or complex. We will develop a simple dashboard with maps, graphics and some simple statistical models/analysis (if time). 
 
 We will be using data from the rKenyaCensus R library developed by Shel Kariuki, which can be installed by running the following code in R: _devtools::install_github("Shelmith-Kariuki/rKenyaCensus”)_.  
