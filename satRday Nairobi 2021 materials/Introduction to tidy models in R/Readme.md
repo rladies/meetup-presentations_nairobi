@@ -1,4 +1,6 @@
-## Intriduction to tidy models in R; September 4, 2021
+## Intriduction to tidy models in R
+
+### September 4, 2021
 
 Our trainer: Asmae Toumi, Director of Analytics and Research,  PursueCare
 
