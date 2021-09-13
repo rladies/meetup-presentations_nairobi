@@ -1,4 +1,6 @@
-## Making my first Shiny App; September 4, 2021
+## Making my first Shiny App
+
+### September 4, 2021
 
 Our trainer: Bryson Mwamburi, Data Scientist, Kantar
 
